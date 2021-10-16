@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    env_file: ./env/db.env
+    ports:
+      - 5432:5432
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+  api: 
+    build: ./api
+    env_file: ./env/api.env
+    depends_on:
+      - db
+    ports:
+      - 5000:5000
+    volumes: 
+      - ./api:/app
+    environment: 
+      - FLASK_APP=app
+      - FLASK_ENV=development
+      - FLASK_RUN_HOST=0.0.0.0
+    command: ['flask', 'run']
+  adminer:
+    image: adminer
+    depends_on: 
+      - db
+    ports:
+      - 8080:8080
+  client:
+    build: client
+    command: ["npm", "start"]
+    volumes:
+      - ./client:/frontend
+      - node-modules:/frontend/node_modules
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+volumes:
+  db-volume:
+  node-modules:
