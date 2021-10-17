@@ -37,22 +37,21 @@ class ScraperModel:
         res = {}
         for attr, v in self.__dict__.items():
             if isinstance(v, Component):
-                print(attr, v, flush=True)
                 component_name = attr.lstrip('_')
                 res[component_name] = getattr(self, component_name)
         return res
 
-    def to_db_model(self):
+    def save_to_db(self):
         dic = self.to_dict()
-        model = self.DB_MODEL(**dic)
-        return model
+        self.DB_MODEL.create(**dic)
 
 class PostID(Component):
 
     def find(self):
         post_div = self.soup.find('div', {'class': 'postinginfos'})
-        post_id = post_div.find('p')
-        if post_id:
+        if post_div:
+
+            post_id = post_div.find('p')
             return int(post_id.text.split()[-1])
 
 class Price(Component):
@@ -60,7 +59,8 @@ class Price(Component):
     def find(self):
         price = self.soup.find('span', {'class': 'price'})
         if price: 
-            return int(price.string.lstrip('$'))
+            price = "".join(price.string.replace(',',''))
+            return int(price.lstrip('$'))
 
 class Title(Component):
 
@@ -81,13 +81,8 @@ class Tags(Component):
         for child in self.soup.find('p', {'class': 'attrgroup'}):
             if not isinstance(child, Tag) or not child.text:
                 continue
-            split_text = child.text.split(':')
-            if len(split_text) == 1:
-                tag = split_text[0]
-                val = True
-            else:
-                tag, val = split_text
-                val = val.lstrip()
+            tag = child.text.split(':')[0]
+            val = True if not child.b else child.b.string.lstrip()
             res[tag] = val
         return res
 
