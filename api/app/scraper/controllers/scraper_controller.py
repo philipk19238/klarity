@@ -15,7 +15,7 @@ scraper_controller = Namespace(
 class ScraperController(Resource):
 
     @scraper_controller.response(201, 'Successfully scraped link data')
-    def get(self):
+    def post(self):
         page = LinkDAO.objects.paginate(page=1, per_page=100)
         while page.has_next:
             urls = [obj.link for obj in page.items]
@@ -27,7 +27,7 @@ class ScraperController(Resource):
 class SeedController(Resource):
 
     @scraper_controller.response(201, 'Successfully seeded database with links')
-    def get(self):
+    def post(self):
         pipeline = SeedingPipeline()
         pipeline.scrape()
         

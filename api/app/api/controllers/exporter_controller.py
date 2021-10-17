@@ -15,7 +15,7 @@ exporter_controller = Namespace(
 class CSVExporterController(Resource):
 
     @exporter_controller.response(200, 'Successfully exported CSV data')
-    def get(self):
+    def post(self):
         all_daos = [dao._data for dao in FurnitureDAO.objects]
         df = pd.json_normalize(all_daos)
         buf_str = StringIO(df.to_csv())
