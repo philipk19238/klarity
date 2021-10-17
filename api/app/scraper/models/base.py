@@ -4,6 +4,7 @@ from bs4 import (
 )
 from abc import abstractmethod
 from functools import lru_cache
+from datetime import datetime
 
 class Component: 
 
@@ -24,6 +25,7 @@ class ScraperModel:
 
     def __init__(self, soup):
         self.soup = soup
+        self.init_fields()
 
     def init_fields(self):
         curr_fields = [elem for elem in self.__dict__.items()]
@@ -35,6 +37,7 @@ class ScraperModel:
         res = {}
         for attr, v in self.__dict__.items():
             if isinstance(v, Component):
+                print(attr, v, flush=True)
                 component_name = attr.lstrip('_')
                 res[component_name] = getattr(self, component_name)
         return res
@@ -43,6 +46,14 @@ class ScraperModel:
         dic = self.to_dict()
         model = self.DB_MODEL(**dic)
         return model
+
+class PostID(Component):
+
+    def find(self):
+        post_div = self.soup.find('div', {'class': 'postinginfos'})
+        post_id = post_div.find('p')
+        if post_id:
+            return int(post_id.text.split()[-1])
 
 class Price(Component):
 
@@ -97,19 +108,26 @@ class Latitude(Component):
 class PictureURL(Component):
 
     def find(self):
-        img = soup.find('img')
+        img = self.soup.find('img')
         if img:
             return img.attrs.get('src')
-            
-class FurnitureScraperModel(ScraperModel):
 
-    def __init__(self, soup):
-        super().__init__(soup)
-        self._price = Price(soup)
-        self._title = Title(soup)
-        self._description = Description(soup)
-        self._tags = Tags(soup)
-        self._longitude = Longitude(soup)
-        self._latitude = Latitude(soup)
-        self._picture_url = PictureURL(soup)
-        self.init_fields()
+class PostTime(Component):
+
+    def find(self):
+        time = self.soup.find('time', {'class': 'date timeago'})
+        if time:
+            time_str = time.attrs.get('datetime')
+            return datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%S-%f')
+
+class Listings(Component):
+
+    def find(self):
+        res = []
+        for listing in self.soup.find_all('li', {'class': 'result-row'}):
+            link = listing.find('a', {'class': ['result-title hdrlnk']}, href=True)
+            if link:
+                res.append(link.attrs['href'])
+        return res
+            
+
