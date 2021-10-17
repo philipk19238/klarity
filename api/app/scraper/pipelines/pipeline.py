@@ -9,7 +9,7 @@ class Pipeline:
         self.cpu_count = cpu_count()
 
     def scrape(self):
-        pool = Pool(self.cpu_count)
+        pool = Pool(100)
         func = self._scrape
         return pool.map(func, self.urls)
 

@@ -12,3 +12,4 @@ class FurnitureDAO(BaseDocument):
     latitude = db.FloatField()
     picture_url = db.StringField()
     post_time = db.DateTimeField()
+    url = db.StringField()

@@ -16,7 +16,8 @@ class FurnitureScraperModel(ScraperModel):
 
     DB_MODEL = FurnitureDAO
 
-    def __init__(self, soup):
+    def __init__(self, soup, url):
+        self.url = url
         self._id = PostID(soup)
         self._price = Price(soup)
         self._title = Title(soup)
@@ -31,5 +32,6 @@ class FurnitureScraperModel(ScraperModel):
     def to_dict(self):
         res = super().to_dict()
         res['_id'] = res['id']
+        res['url'] = self.url
         del res['id']
         return res

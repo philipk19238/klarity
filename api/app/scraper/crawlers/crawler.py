@@ -30,5 +30,5 @@ class Crawler:
             return req.text
 
     def random_agent(self):
-        idx = random.randint(0, len(self.USER_AGENT_LIST))
+        idx = random.randint(0, len(self.USER_AGENT_LIST) - 1)
         return self.USER_AGENT_LIST[idx]

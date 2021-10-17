@@ -30,10 +30,9 @@ class PageScraperModel(ScraperModel):
         else:
             return self._max_cursor
 
-    @lru_cache()
     def save_to_db(self):
-        res = []
+        bulk = self.DB_MODEL._get_collection().initialize_ordered_bulk_op()
         for listing in self.listings:
             kwargs = {'_id': listing, 'link': listing}
-            res.append(self.DB_MODEL(**kwargs))
-        LinkDAO.objects.insert(res)
+            bulk.find({'_id': listing}).upsert().replace_one(kwargs)
+        bulk.execute()
