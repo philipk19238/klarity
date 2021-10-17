@@ -1,9 +1,9 @@
 # KLARITY
 
 ## Inspiration 
-Many members of our team enjoy thrifting & buying used products but we've oftentimes had to bargain & haggle to acquire an item. This process oftentimes results in one party paying too much/too little and is overall an unpleasant experience. We thought it would be cool to build a solution that allows buyers to know if they're paying too much for a used good and inform sellers of the going market rate so they can correctly price their items. 
+Many members of our team enjoy thrifting & buying used products, but we've oftentimes had to bargain & haggle to acquire an item. This process oftentimes results in one party paying too much/too little and is overall an unpleasant experience. We thought it would be cool to build a solution that allows buyers to know if they're paying too much for a used good and inform sellers of the going market rate so they can correctly price their items. 
 
-What really solidified our decision is that we discovered that the used goods market is growing at a rapid pace and we believe our solution can encourage more people to <b>"renew, rather than by new."</b>
+What really solidified our decision is that we discovered that the used goods market is growing at a rapid pace and we believe our solution can encourage more people to <b>"renew, rather than buy new."</b>
 
 ## What it does
 Klarity is an advanced search engine that tracks the price of used goods over time. Feel free to enter any query and Klarity will visualize the price trend results to you instantly!
