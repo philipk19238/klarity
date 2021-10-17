@@ -1,3 +1,4 @@
-body, html { 
-    font-family: 'typeface-pt-sans', sans-serif;
+.font-loader{ 
+    font-family: 'typeface-dm-sans', sans-serif;
+    text-align: center;
   }
