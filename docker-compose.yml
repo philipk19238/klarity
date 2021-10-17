@@ -6,7 +6,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - db-volume:/var/lib/mongodb/data
+      - ~/mongo/data:/data/db
   api: 
     build: ./api
     env_file: ./env/api.env
@@ -41,5 +41,4 @@ services:
     depends_on:
       - api
 volumes:
-  db-volume:
   node-modules:

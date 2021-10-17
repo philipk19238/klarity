@@ -50,7 +50,6 @@ class PostID(Component):
     def find(self):
         post_div = self.soup.find('div', {'class': 'postinginfos'})
         if post_div:
-
             post_id = post_div.find('p')
             return int(post_id.text.split()[-1])
 
@@ -65,7 +64,9 @@ class Price(Component):
 class Title(Component):
 
     def find(self):
-        return self.soup.title.string
+        title = self.soup.find('span', id='titletextonly')
+        if title:
+            return title.string
 
 class Description(Component):
 
@@ -124,5 +125,3 @@ class Listings(Component):
             if link:
                 res.append(link.attrs['href'])
         return res
-            
-
