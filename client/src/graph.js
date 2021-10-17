@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { LineChart, Line, Tooltip} from 'recharts';
 import './graph.css';
-require('typeface-pt-sans');
+require('typeface-dm-sans');
 
 
 
@@ -69,8 +69,8 @@ export default function App() {
 
 
     return (
-        <div>
-            <LineChart width={500} height={250} margin={{ top: 150, right: 30, left: 20, bottom: 5 }} data={items}>
+        <div className = "font-loader">
+            <LineChart width={750} height={375} margin={{ top: 225, right: 45, left: 30, bottom: 7.5 }} data={items}>
 
                         <Line dot={false}  type="monotone" dataKey="1. open" stroke="#82ca9d" strokeWidth={4} fill="#62ac92" yAxisId="100" />
                        <Tooltip content={<CustomTooltip data={items} />} />
