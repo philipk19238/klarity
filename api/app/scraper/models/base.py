@@ -58,7 +58,8 @@ class Price(Component):
     def find(self):
         price = self.soup.find('span', {'class': 'price'})
         if price: 
-            return int(price.string.lstrip('$'))
+            price = "".join(price.string.replace(',',''))
+            return int(price.lstrip('$'))
 
 class Title(Component):
 

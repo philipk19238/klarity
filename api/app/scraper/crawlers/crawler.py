@@ -1,10 +1,12 @@
+import requests
+
 from bs4 import BeautifulSoup
 from abc import abstractmethod
 
 class Crawler:
 
     def __init__(self, base_url):
-        self.base_url = base_url + '/d/furniture/search/fua?'
+        self.base_url = base_url
 
     @abstractmethod
     def scrape(self):

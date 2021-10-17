@@ -8,7 +8,7 @@ from ..models.page import PageScraperModel
 class SeedingCrawler(Crawler):
 
     def __init__(self, base_url):
-        super().__init__(base_url)
+        super().__init__(base_url + '/d/furniture/search/fua?')
         self.stack = []
 
     def scrape(self):

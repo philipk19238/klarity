@@ -1,8 +1,8 @@
 import requests
 
 from flask_restx import Namespace, Resource
-from ..crawlers.seeding_crawler import SeedingCrawler
-from ..models.furniture import FurnitureScraperModel
+from ..pipelines.scraping_pipeline import ScrapingPipeline
+from ...shared.models.link import LinkDAO
 from bs4 import BeautifulSoup
 
 scraper_controller = Namespace(
@@ -14,6 +14,6 @@ class ScraperController(Resource):
      
      @scraper_controller.response(201, 'Successfully scraped data')
      def get(self):
-         crawler = SeedingCrawler('https://collegestation.craigslist.org')
-         crawler.scrape()
-         
+         urls = [obj.link for obj in LinkDAO.objects]
+         pipeline = ScrapingPipeline(urls)
+         pipeline.scrape()
