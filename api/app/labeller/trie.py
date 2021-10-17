@@ -40,4 +40,4 @@ class Trie:
             elif node.end_keys:
                 curr_pair = {(key, word) for key in node.end_keys}
                 pairs = pairs | curr_pair
-        return pairs  
+        return pairs
