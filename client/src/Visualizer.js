@@ -1,6 +1,7 @@
 import React from 'react';
 import Graph from './graph';
 import ButtonAppBar from './Navbar';
+import BodyData from './SearchBar'
 const Visualizer = () => {
     return (
         <html>
@@ -24,6 +25,10 @@ const Visualizer = () => {
                 <br></br>
                 <br></br>
                     <Graph/>
+                    <br></br>
+                <br></br>
+                <br></br>
+                    <BodyData/>
                     </div>
                     </body>
                     </html>
