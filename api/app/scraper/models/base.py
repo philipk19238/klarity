@@ -37,15 +37,13 @@ class ScraperModel:
         res = {}
         for attr, v in self.__dict__.items():
             if isinstance(v, Component):
-                print(attr, v, flush=True)
                 component_name = attr.lstrip('_')
                 res[component_name] = getattr(self, component_name)
         return res
 
-    def to_db_model(self):
+    def save_to_db(self):
         dic = self.to_dict()
-        model = self.DB_MODEL(**dic)
-        return model
+        self.DB_MODEL.create(**dic)
 
 class PostID(Component):
 

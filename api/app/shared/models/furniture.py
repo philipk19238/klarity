@@ -1,5 +1,3 @@
-import uuid
-
 from .base import BaseDocument
 from ...extensions import db
 
