@@ -16,7 +16,7 @@ class ScraperController(Resource):
 
     @scraper_controller.response(201, 'Successfully scraped link data')
     def get(self):
-        page = LinkDAO.objects.paginate(page=3, per_page=100)
+        page = LinkDAO.objects.paginate(page=1, per_page=100)
         while page.has_next:
             urls = [obj.link for obj in page.items]
             pipeline = ScrapingPipeline(urls)
@@ -30,7 +30,8 @@ class SeedController(Resource):
     def get(self):
         pipeline = SeedingPipeline()
         pipeline.scrape()
-
+        
+        
 
 
 

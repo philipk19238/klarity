@@ -16,5 +16,3 @@ class Pipeline:
     @abstractmethod
     def _scrape(self):
         pass
-        
-

@@ -6,3 +6,4 @@ flask-cors
 beautifulsoup4
 requests
 nltk
+pandas
