@@ -20,7 +20,7 @@ class ScrapingCrawler(Crawler):
         try:
             html = self.get_html(self.base_url)
             soup = self.get_soup(html)
-            if soup.title.string:
+            if soup.title and soup.title.string:
                 print(self.base_url, flush=True)
                 furniture = FurnitureScraperModel(soup, self.base_url)
                 furniture = self.labeller.label(furniture)

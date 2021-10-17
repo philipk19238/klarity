@@ -5,6 +5,8 @@ services:
     env_file: ./env/db.env
     ports:
       - 27017:27017
+    volumes:
+      - ~/mongo/data:/data/db
   api: 
     build: ./api
     env_file: ./env/api.env
