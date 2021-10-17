@@ -3,3 +3,5 @@ flask-restx
 flask-mongoengine
 python-dotenv
 flask-cors
+beautifulsoup4
+requests
